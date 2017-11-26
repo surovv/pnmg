@@ -1,6 +1,16 @@
+/// Types
+const someType = class Some{};
+export const Some = new someType;
+// isSome :: a -> Bool
+const isSome = x => x !== undefined;
+
+/// end Types
+
 // isMatched :: (a, b) -> Bool
 const isMatched = (pattern, val) => (pattern === val)
-  || (pattern === val.constructor);
+  || (pattern === val.constructor)
+  || (pattern.constructor === someType && isSome(val))
+;
 
 
 // match :: (a, [[b, a -> c]]) -> Object
