@@ -4,12 +4,17 @@ export const Some = new someType;
 // isSome :: a -> Bool
 const isSome = x => x !== undefined;
 
+const condType = class Cond{};
+// Cond :: Function -> a -> Bool
+export const Cond = f => Object.assign(arg => f(arg), {constructor: condType});
+
 /// end Types
 
 // isMatched :: (a, b) -> Bool
 const isMatched = (pattern, val) => (pattern === val)
   || (pattern === val.constructor)
   || (pattern.constructor === someType && isSome(val))
+  || (pattern.constructor === condType && pattern(val))
 ;
 
 
