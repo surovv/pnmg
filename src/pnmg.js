@@ -10,11 +10,20 @@ export const Cond = f => Object.assign(arg => f(arg), {constructor: condType});
 
 /// end Types
 
+
+
+// matchArray :: (Array, Array) -> Bool
+const matchArray = (patterns, vals) => (patterns.length === 0 && vals.length === 0) || (
+  (patterns.length <= vals.length && patterns.length !== 0)
+  && patterns.every((pattern, index) => isMatched(pattern, vals[index]))
+);
+
 // isMatched :: (a, b) -> Bool
 const isMatched = (pattern, val) => (pattern === val)
   || (pattern === val.constructor)
   || (pattern.constructor === someType && isSome(val))
   || (pattern.constructor === condType && pattern(val))
+  || (pattern.constructor === Array && matchArray(pattern, val))
 ;
 
 
