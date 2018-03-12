@@ -1,6 +1,6 @@
 {
   "name": "pnmg",
-  "version": "0.2.0",
+  "version": "1.0.0",
   "description": "Powerful pattern matching for Javascript",
   "main": "dist/pnmg.js",
   "scripts": {
@@ -26,13 +26,12 @@
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
-    "babel-eslint": "^8.0.1",
-    "babel-loader": "^7.1.2",
-    "babel-preset-es2015": "^6.24.1",
+    "babel-eslint": "^8.2.2",
+    "babel-loader": "^7.1.4",
+    "babel-preset-env": "^1.6.1",
     "babel-preset-stage-0": "^6.24.1",
-    "eslint": "^4.8.0",
-    "eslint-plugin-fp": "^2.3.0",
-    "webpack": "^3.6.0",
-    "webpack-dev-server": "^2.9.1"
+    "eslint": "^4.18.2",
+    "webpack": "^4.1.1",
+    "webpack-cli": "^2.0.11"
   }
 }
