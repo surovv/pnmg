@@ -1,4 +1,4 @@
-import {DefinedType, isDefined, CondType} from './types';
+import {DefinedType, isDefined, GuardType} from './types';
 
 
 // matchArray :: (Array, Array) -> Bool
@@ -32,7 +32,7 @@ const isMatched = (val, pattern) => (
   (val === pattern)
   || (val.constructor === pattern)
   || (pattern.constructor === DefinedType && isDefined(val))
-  || (pattern.constructor === CondType && pattern(val))
+  || (pattern.constructor === GuardType && pattern(val))
   || (val.constructor === Array && pattern.constructor === Array && matchArray(val, pattern))
   || (val.constructor === Object && pattern.constructor === Object && matchObject(val, pattern))
 );
