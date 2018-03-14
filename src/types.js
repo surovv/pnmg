@@ -1,9 +1,9 @@
-export const SomeType = class Some {};
+export const DefinedType = class Defined {};
 
-export const Some = new SomeType();
+export const Defined = new DefinedType();
 
-// isSome :: a -> Bool
-export const isSome = x => x !== undefined;
+// isDefined :: a -> Bool
+export const isDefined = x => x !== undefined;
 
 
 export const CondType = class Cond {};

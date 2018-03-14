@@ -1,12 +1,12 @@
-import {SomeType, isSome, CondType} from './types';
+import {DefinedType, isDefined, CondType} from './types';
 
 
 // matchArray :: (Array, Array) -> Bool
-const matchArray = (patterns, vals) => (
+const matchArray = (vals, patterns) => (
   (patterns.length === 0 && vals.length === 0)
   || (
     (patterns.length <= vals.length && patterns.length !== 0)
-    && patterns.every((pattern, index) => isMatched(pattern, vals[index]))
+    && patterns.every((pattern, index) => isMatched(vals[index], pattern))
   )
 );
 
@@ -15,35 +15,35 @@ const matchArray = (patterns, vals) => (
 const getObjectsKeys = objects => objects.map(Object.keys);
 
 // matchObject :: (Object, Object) -> Bool
-const matchObject = (pattern, val) => {
+const matchObject = (val, pattern) => {
   const [patternKeys, valKeys] = getObjectsKeys([pattern, val]);
 
   return (patternKeys.length === 0 && valKeys.length === 0)
     || (
       patternKeys.length <= valKeys.length
       && patternKeys.length !== 0
-      && patternKeys.every(k => valKeys.includes(k) && isMatched(pattern[k], val[k]))
+      && patternKeys.every(k => valKeys.includes(k) && isMatched(val[k], pattern[k]))
     );
 };
 
 
 // isMatched :: (a, b) -> Bool
-const isMatched = (pattern, val) => (
-  (pattern === val)
-  || (pattern === val.constructor)
-  || (pattern.constructor === SomeType && isSome(val))
+const isMatched = (val, pattern) => (
+  (val === pattern)
+  || (val.constructor === pattern)
+  || (pattern.constructor === DefinedType && isDefined(val))
   || (pattern.constructor === CondType && pattern(val))
-  || (pattern.constructor === Array && matchArray(pattern, val))
-  || (pattern.constructor === Object && matchObject(pattern, val))
+  || (val.constructor === Array && pattern.constructor === Array && matchArray(val, pattern))
+  || (val.constructor === Object && pattern.constructor === Object && matchObject(val, pattern))
 );
 
 
 // match :: (a, [[b, a -> c]]) -> Object
 export const match = (val, patterns = []) => ({
-  when: (pattern, pval) => match(val, [...patterns, [pattern, pval]]),
+  when: (pattern, handler) => match(val, [...patterns, [pattern, handler]]),
 
-  default: defaultFn => {
-    const finded = patterns.find(([pattern, _result]) => isMatched(pattern, val));
-    return (finded ? finded[1] : defaultFn)(val);
+  default: handler => {
+    const finded = patterns.find(([pattern, _handler]) => isMatched(val, pattern));
+    return (finded ? finded[1] : handler)(val);
   },
 });

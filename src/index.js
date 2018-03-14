@@ -1,6 +1,2 @@
-import {match} from './match';
-
-export {match};
-export default match;
-
-export {Some, Cond} from './types';
+export {match} from './match';
+export {Defined, Cond} from './types';
