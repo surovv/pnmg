@@ -1,10 +1,11 @@
 {
   "name": "pnmg",
   "version": "1.0.0",
-  "description": "Powerful pattern matching for Javascript",
+  "description": "Powerful and lightweight deep pattern matching for Javascript",
   "main": "dist/pnmg.js",
   "scripts": {
-    "build": "webpack -p"
+    "build": "webpack -p",
+    "test": "./node_modules/.bin/mocha --compilers js:babel-core/register"
   },
   "repository": {
     "type": "git",
@@ -15,7 +16,10 @@
     "pattern match",
     "matching",
     "match",
-    "pattern"
+    "pattern",
+    "switch",
+    "declarative",
+    "comparison"
   ],
   "author": "s zh",
   "license": "MIT",
@@ -31,6 +35,8 @@
     "babel-preset-env": "^1.6.1",
     "babel-preset-stage-0": "^6.24.1",
     "eslint": "^4.18.2",
+    "eslint-config-szh": "^0.0.3",
+    "mocha": "^5.0.4",
     "webpack": "^4.1.1",
     "webpack-cli": "^2.0.11"
   }

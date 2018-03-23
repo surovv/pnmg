@@ -1,0 +1,6 @@
+{
+  "extends": ["szh"],
+  "rules": {
+    "no-use-before-define": 0
+  }
+}
