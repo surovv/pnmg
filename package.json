@@ -1,6 +1,6 @@
 {
   "name": "pnmg",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Powerful and lightweight deep pattern matching for Javascript",
   "main": "dist/pnmg.js",
   "scripts": {
